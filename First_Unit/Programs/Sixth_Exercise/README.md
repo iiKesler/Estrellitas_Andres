@@ -140,3 +140,16 @@ Are inside the
 
       void task1()
 Function.
+
+## Questions
+-> How does this program run?
+
+> This program executes on a microcontroller that works with the Arduino IDE, thanks to some libraries, it's compatible with the Raspberry pi pico microcontroller. Once the program starts, it calls the task1() function once, but then on the void loop(), it calls it infinitely. The task1() function implements a state machine to print the time.
+
+-> You may have seen this message: Serial.print("Task1States::WAIT_TIMEOUT\n");. Why do you think this happens?
+
+> This message is printed when the state machine transitions to the WAIT_TIMEOUT state from the INIT state. In the INIT state, after initializing the Serial communication and setting lastTime to the current time, the state machine changes to WAIT_TIMEOUT and the message is printed.
+
+-> How many times is the code in the Task1States::INIT case executed?
+
+> The code in the Task1States::INIT case is executed once at startup when the machine state is INIT.After the first execution, the machine state changes to WAIT_TIMEOUT, so it does not return to the INIT state unless the microcontroller is restarted or the machine state is changed to INIT elsewhere in the code
