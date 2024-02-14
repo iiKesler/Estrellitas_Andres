@@ -48,7 +48,7 @@ void task1(){
       if ((currentTime - lastTime_task1) >= INTERVAL_task1){
         // Acciones
         lastTime_task1 = currentTime;
-        Serial.print("Mensaje a 1 Hz\n");
+        Serial.print("Mensaje a 1 sgundo\n");
       }
       break;
     }
@@ -77,7 +77,7 @@ void task2(){
       if ((currentTime - lastTime_task2) >= INTERVAL_task2){
         // Acciones
         lastTime_task2 = currentTime;
-        Serial.print("Mensaje a 2 Hz\n");
+        Serial.print("Mensaje a 2 segundos\n");
       }
       break;
     }
@@ -106,7 +106,7 @@ void task3(){
       if((currentTime - lastTime_task3) >= INTERVAL_task3){
         // Acciones
         lastTime_task3 = currentTime;
-        Serial.print("Mensaje a 3 Hz\n");
+        Serial.print("Mensaje a 3 segundos\n");
       }
       break;
     }
