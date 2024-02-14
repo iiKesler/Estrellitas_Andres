@@ -1,4 +1,4 @@
-// Definición de estados y variable de estados task1()
+// Definición de estados y variable de estados
 enum class Task1States{
   INIT,
   WAIT_TIMEOUT
