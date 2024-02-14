@@ -1,3 +1,5 @@
+#include <WiFi.h>
+
 // Definición de estados y variable de estado
 enum class Task1States{
   INIT,
@@ -17,7 +19,7 @@ void task1(){
     case Task1States::INIT:{
       // Acciones
       Serial.begin(115200);
-
+      
       // Garantiza los valores iniciales para el siguiente estado
       lastTime = millis();
       task1State = Task1States::WAIT_TIMEOUT;

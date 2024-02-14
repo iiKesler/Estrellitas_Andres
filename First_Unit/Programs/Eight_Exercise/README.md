@@ -1,0 +1,1 @@
+Firstly, we create the necessary enumaration classes, in this case, task1(), task2() and task3(), we then declared
