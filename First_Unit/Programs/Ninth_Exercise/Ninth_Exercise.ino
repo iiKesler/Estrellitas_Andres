@@ -25,9 +25,9 @@ static Task3States task3State = Task3States::INIT;
 static uint32_t lastTime_task3 = 0;
 
 // Constantes
-constexpr uint32_t INTERVAL_task1 = 1000;
-constexpr uint32_t INTERVAL_task2 = 2000;
-constexpr uint32_t INTERVAL_task3 = 3000;
+constexpr uint32_t INTERVAL_task1 = 1000; // 1 Hz
+constexpr uint32_t INTERVAL_task2 = 2000; // 0.5 Hz
+constexpr uint32_t INTERVAL_task3 = 4000; // 0.25 Hz
 
 void task1(){
   // Máquina de estados
@@ -48,7 +48,7 @@ void task1(){
       if ((currentTime - lastTime_task1) >= INTERVAL_task1){
         // Acciones
         lastTime_task1 = currentTime;
-        Serial.print("Mensaje a 1 segundo\n");
+        Serial.print("Mensaje a 1 Hz\n");
       }
       break;
     }
@@ -77,7 +77,7 @@ void task2(){
       if ((currentTime - lastTime_task2) >= INTERVAL_task2){
         // Acciones
         lastTime_task2 = currentTime;
-        Serial.print("Mensaje a 2 segundos\n");
+        Serial.print("Mensaje a 2 Hz\n");
       }
       break;
     }
@@ -106,7 +106,7 @@ void task3(){
       if((currentTime - lastTime_task3) >= INTERVAL_task3){
         // Acciones
         lastTime_task3 = currentTime;
-        Serial.print("Mensaje a 3 segundos\n");
+        Serial.print("Mensaje a 3 Hz\n");
       }
       break;
     }
