@@ -115,7 +115,7 @@ The first message is at 1Hz, the second one is at 0.5Hz, and the third one at 0.
           if((currentTime - lastTime_task3) >= INTERVAL_task3){
             // Acciones
             lastTime_task3 = currentTime;
-            Serial.print("Mensaje a 3 Hz\n");
+            Serial.print("Mensaje a 4 Hz\n");
           }
           break;
         }
