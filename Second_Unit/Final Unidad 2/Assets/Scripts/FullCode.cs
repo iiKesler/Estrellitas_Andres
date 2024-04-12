@@ -41,7 +41,7 @@ public class FullCode : MonoBehaviour
     private void Start() 
     {
         _serialPort = new SerialPort();
-        _serialPort.PortName = "COM1";
+        _serialPort.PortName = "COM3";
         _serialPort.BaudRate = 115200;
         _serialPort.DtrEnable = true;
         _serialPort.Open();

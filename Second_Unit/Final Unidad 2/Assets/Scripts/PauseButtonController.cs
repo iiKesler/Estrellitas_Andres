@@ -15,6 +15,7 @@ public class PauseButtonController : MonoBehaviour
     private void Pause()
     {
         // Call the Pause method in the MediaBarController script
+        Debug.Log("Pause button clicked");
         mediaBarController.Pause();
     }
 }

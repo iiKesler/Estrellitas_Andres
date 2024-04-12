@@ -11,12 +11,14 @@ public class MediaBarController : MonoBehaviour
 
     private float _currentTime; // The current time of the track
     private bool _isPlaying; // Whether the media bar is playing or paused
+    private bool _isPaused;
 
     private void Start()
     {
         // Set the maximum value of the Slider to the selected duration
         mediaBar.maxValue = selectedDuration;
         _isPlaying = false; // Initially set isPlaying to false
+        _isPaused = true;
     }
 
     private void Update()
@@ -24,6 +26,7 @@ public class MediaBarController : MonoBehaviour
         // Only update the current time and the Slider's value if isPlaying is true
         if (_isPlaying)
         {
+            _isPaused = false;
             // Update the current time and the Slider's value
             _currentTime += Time.deltaTime;
             mediaBar.value = _currentTime;
@@ -37,11 +40,12 @@ public class MediaBarController : MonoBehaviour
         else
         {
             // If a track has been selected and is not empty, and the volume level is greater than or equal to 0, start the slider
-            if (!string.IsNullOrEmpty(fullCode.selectedTrack) && int.Parse(fullCode.selectedTrack) > 0 && fullCode.selectedVolume >= 0)
+            if (!string.IsNullOrEmpty(fullCode.selectedTrack) && int.Parse(fullCode.selectedTrack) > 0 && fullCode.selectedVolume >= 0 && _isPaused == false)
             {
                 _isPlaying = true;
             }
         }
+        
     }
 
     // Call this method when the track is changed to restart the timer
@@ -53,13 +57,16 @@ public class MediaBarController : MonoBehaviour
     // Call this method to pause the media bar
     public void Pause()
     {
+        Debug.Log("Media Bar paused");
         _isPlaying = false;
+        _isPaused = true;
     }
 
     // Call this method to play the media bar
     public void Play()
     {
         _isPlaying = true;
+        _isPaused = false;
     }
 
     // Call this method to skip to the next track
