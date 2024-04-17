@@ -1,4 +1,4 @@
-# Third Exercise
+# Fourth Exercise
 The purpose of this exercise is to understand how to send numbers to the serial. In this case, we have 4 numbers in hexadecimal and using a website, we can convert them to decimal and from there, send them to the serial.
 
 ### Sending the same sequence but backwards
