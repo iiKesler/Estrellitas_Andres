@@ -51,7 +51,7 @@ void loop() {
   //if(Serial.available()){
     //if(Serial.read() == 's'){
       //memcpy(arr,(uint8_t *)&num,4);
-      //Serial.write(arr[i]);
+      //Serial.write(arr,4);
     //}
   //}
 //}
