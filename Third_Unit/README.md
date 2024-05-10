@@ -82,4 +82,11 @@ Like I pointed out at the beginnig, the temperature is used for the player to al
 Since the `playingState()` method is only called when the player is in the **PLAYING** state (exactly when is most likely for the player to overheat) we only call the temperature check and print here, and in the case that it goes aboved the threshold, it forces the player off, restarting the whole program
 
 ## Unity
-The way this 
+The way this code works with unity is like this: The Unity editor sends what track the user wants to listen to, then at what volume, and once the user hits the play button, it starts the song. For now, it is not possible to change the duration of the song "in game" (this means it is possible to change the duration inside the unity editor, by inspecting the slider that is acts as the length of the song) so it just gets a default value. The issue comes with trying to implement the temperature as a visual manner, since the way it works is basically
+
+> We **send** what track the user wants to listen to
+> We **send** at what volume they want to listen
+> We **send** how long the track is
+> We **receive** at what temperature is the player
+
+And this... is the problem, because I haven't been able to properly set up the reading of that specific data that the player sends, it's always incorrect one way or the other, the other variables work as intended, but not this one, since it's basically the only one that sends the information from the microcontroller to the project, and all the other are the other way around. I have to keep working on it to fix this issue.
