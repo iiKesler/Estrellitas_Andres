@@ -1,3 +1,5 @@
+#include <pico/stdlib.h>
+#include <hardware/adc.h>
 #include <Arduino.h>
 
 enum State {
@@ -79,9 +81,10 @@ uint8_t calculateReceivedChecksum(float value) {
 }
 
 // Function to handle received data
-void handleReceivedData(float temperature, float volume, float currentTrack, float trackDuration, uint8_t receivedChecksum) {
+void handleReceivedData(float temperature, float deltaTemperature, float volume, float deltaVolume, float currentTrack, float deltaCurrentTime, float trackDuration, float deltaTrackDuration, uint8_t receivedChecksum) {
     // Calculate the checksum of the received data
-    uint8_t calculatedChecksum = calculateReceivedChecksum(temperature) ^ calculateReceivedChecksum(volume) ^ calculateReceivedChecksum(currentTrack) ^ calculateReceivedChecksum(trackDuration);
+    uint8_t calculatedChecksum = calculateReceivedChecksum(temperature) ^ calculateReceivedChecksum(deltaTemperature) ^ calculateReceivedChecksum(volume) ^ calculateReceivedChecksum(deltaVolume) ^ 
+            calculateReceivedChecksum(currentTrack) ^ calculateReceivedChecksum(deltaCurrentTime) ^ calculateReceivedChecksum(trackDuration) ^ calculateReceivedChecksum(deltaTrackDuration);
 
     // Compare the calculated checksum with the received checksum
     if (calculatedChecksum != receivedChecksum) {
@@ -223,11 +226,12 @@ void task() {
                 Serial.write(currentTrackEnabled);
                 Serial.write(trackDurationEnabled);
 
-                uint8_t checksum = calculateChecksum(temperature) ^ calculateChecksum(deltaTemperature) ^ calculateChecksum(volume) ^ calculateChecksum(deltaVolume) ^ calculateChecksum(currentTrack) ^ calculateChecksum(deltaCurrentTrack) ^ calculateChecksum(trackDuration) ^ calculateChecksum(deltaTrackDuration);
+                uint8_t checksum = calculateChecksum(temperature) ^ calculateChecksum(deltaTemperature) ^ calculateChecksum(volume) ^ 
+                        calculateChecksum(deltaVolume) ^ calculateChecksum(currentTrack) ^ calculateChecksum(deltaCurrentTrack) ^ calculateChecksum(trackDuration) ^ calculateChecksum(deltaTrackDuration);
                 Serial.write(checksum);
 
                 // Call handleReceivedData() with the received data
-                handleReceivedData(temperature, volume, currentTrack, trackDuration, checksum);
+                handleReceivedData(temperature, deltaTemperature,  volume, deltaVolume, currentTrack, deltaCurrentTrack, trackDuration,  deltaTrackDuration, checksum);
                 break;
             }
             default:
@@ -245,16 +249,17 @@ void playingState() {
             float temperature = readTemperature();
             Serial.print("Current temperature: ");
             Serial.println(temperature);
+            Serial.println("\n");
 
             // Check if the temperature reaches a certain value
             if (temperature >= 45.0) {
-                // If the temperature is too high, turn off the player
-                currentState = STATE_OFF;
-                playerOn = false;
+                // If the temperature is too high, turn off the player             
                 Serial.println("Player turned off due to high temperature.");
+                playerOn = false;
+                currentState = STATE_OFF;
                 return; // Exit the function early
             }
-
+            
             if (trackDuration > 0) {
                 trackDuration--;
                 Serial.println("Track duration: " + String(trackDuration) + " seconds");
@@ -284,6 +289,9 @@ void playingState() {
 void setup() {
     Serial.begin(115200);
     pinMode(LED_BUILTIN, OUTPUT);
+    adc_init();
+  //enable temperature sensor
+  adc_set_temp_sensor_enabled(true);
     currentState = STATE_OFF;
 }
 
