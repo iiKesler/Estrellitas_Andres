@@ -69,4 +69,12 @@ public class FullCode : MonoBehaviour
                 break;
         }
     }
+    
+    private void OnApplicationQuit()
+    {
+        if (_serialPort is { IsOpen: true })
+        {
+            _serialPort.Close();
+        }
+    }
 }
