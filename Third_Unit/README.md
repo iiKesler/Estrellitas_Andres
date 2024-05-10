@@ -93,3 +93,9 @@ The way this code works with unity is like this: The Unity editor sends what tra
 > We **receive** at what temperature is the player
 
 And this... is the problem, because I haven't been able to properly set up the reading of that specific data that the player sends, it's always incorrect one way or the other, the other variables work as intended, but not this one, since it's basically the only one that sends the information from the microcontroller to the project, and all the other are the other way around. I have to keep working on it to fix this issue.
+
+## Status Diagram
+The status diagram for this project looks like this:
+
+![Status_Diagram](https://github.com/iiKesler/Estrellitas_Andres/assets/89699466/14ef91d7-fb19-4a00-a60b-ee995b24c131)
+
